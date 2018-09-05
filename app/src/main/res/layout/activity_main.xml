@@ -11,10 +11,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:padding="10dp"
-        app:mText="yuzhiqiang"
-
         android:background="@color/colorPrimary"
+        android:padding="10dp"
+
+        app:mText="yuzhiqiang"
         app:mTextSize="24sp" />
 
 
@@ -22,9 +22,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:padding="10dp"
         android:background="@color/colorPrimary"
+        android:padding="10dp"
         android:text="yuzhiqiang"
         android:textSize="24sp" />
+
+
+    <com.yzq.customview.widget.QQStepView
+        android:layout_marginTop="10dp"
+        android:id="@+id/qqStepView"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:roundWidth="2dp"
+        app:defaultColor="@color/colorPrimary"
+        app:progressColor="@color/colorAccent"
+        android:layout_gravity="center" />
 
 </LinearLayout>
