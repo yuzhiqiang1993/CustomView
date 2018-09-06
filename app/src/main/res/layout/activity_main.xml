@@ -36,9 +36,33 @@
         android:layout_marginTop="10dp"
         android:padding="5dp"
         app:defaultColor="@color/colorPrimary"
-        app:progressColor="@color/colorAccent"
         app:mTextColor="@color/colorAccent"
         app:mTextSize="20sp"
+        app:progressColor="@color/colorAccent"
         app:roundWidth="6dp" />
+
+
+    <com.yzq.customview.widget.ColorText
+        android:id="@+id/colorText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="yuzhiqiang"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:changeColor="@color/colorAccent" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/l2r"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="从左到右" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/r2l"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="从右到左" />
+
 
 </LinearLayout>

@@ -23,4 +23,12 @@
 
     </declare-styleable>
 
+
+    <declare-styleable name="ColorText">
+
+        <attr name="changeColor" format="color"></attr>
+
+
+    </declare-styleable>
+
 </resources>
