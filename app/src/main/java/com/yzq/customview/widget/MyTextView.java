@@ -110,8 +110,7 @@ public class MyTextView extends View {
 
         /*计算基线*/
         float dy = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
-        float baseLine = getHeight() / 2 + dy;
-
+        float baseLine = height/ 2 + dy;
 
         /*绘制文字*/
         canvas.drawText(mText, getPaddingLeft(), baseLine, textPaint);

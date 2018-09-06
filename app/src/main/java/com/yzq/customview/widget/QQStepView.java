@@ -1,5 +1,6 @@
 package com.yzq.customview.widget;
 
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
@@ -10,8 +11,10 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 
 import com.yzq.customview.R;
+import com.yzq.customview.utils.LogUtils;
 
 public class QQStepView extends View {
 
@@ -22,7 +25,17 @@ public class QQStepView extends View {
     private int mTextSize = 18;
     private int width;
     private int height;
-    private Paint roundPaint;
+    private Paint roundPaint, textPaint, progressPaint;
+    private int centX;
+    private int centY;
+    private int radius;
+
+
+    private int maxProgress = 100;
+    private int currentProgress = 36;
+    private float percent;
+    private RectF rectF;
+    private String currentProgressText;
 
     public QQStepView(Context context) {
         this(context, null);
@@ -42,12 +55,37 @@ public class QQStepView extends View {
         defaultColor = typedArray.getColor(R.styleable.QQStepView_defaultColor, defaultColor);
         progressColor = typedArray.getColor(R.styleable.QQStepView_progressColor, progressColor);
         roundWidth = typedArray.getDimensionPixelSize(R.styleable.QQStepView_roundWidth, roundWidth);
+
         mTextSize = typedArray.getDimensionPixelSize(R.styleable.QQStepView_mTextSize, mTextSize);
 
         typedArray.recycle();
 
 
         initPaint();
+
+        initAnimator();
+    }
+
+    private void initAnimator() {
+
+        ValueAnimator valueAnimator = ValueAnimator.ofInt(currentProgress);
+        valueAnimator.setInterpolator(new DecelerateInterpolator());
+        valueAnimator.setDuration(1000);
+
+        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                int progress = (int) animation.getAnimatedValue();
+                percent = (float) progress / maxProgress;
+                currentProgressText = progress + "";
+                invalidate();
+
+            }
+        });
+
+        valueAnimator.start();
+
+
     }
 
     private void initPaint() {
@@ -56,7 +94,19 @@ public class QQStepView extends View {
         roundPaint.setAntiAlias(true);
         roundPaint.setStrokeCap(Paint.Cap.ROUND);
         roundPaint.setColor(defaultColor);
-        roundPaint.setStrokeWidth(dp2px(roundWidth));
+        roundPaint.setStrokeWidth(roundWidth);
+
+        textPaint = new Paint();
+        textPaint.setAntiAlias(true);
+        textPaint.setColor(mTextColor);
+        textPaint.setTextSize(mTextSize);
+
+        progressPaint = new Paint();
+        progressPaint.setStyle(Paint.Style.STROKE);
+        progressPaint.setAntiAlias(true);
+        progressPaint.setStrokeCap(Paint.Cap.ROUND);
+        progressPaint.setColor(progressColor);
+        progressPaint.setStrokeWidth(roundWidth);
 
 
     }
@@ -85,17 +135,63 @@ public class QQStepView extends View {
 
 
     @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        /*圆的中心坐标*/
+        centX = w / 2;
+        centY = h / 2;
+
+        /*求圆的半径*/
+        radius = centX - roundWidth;
+
+        LogUtils.i("半径：" + radius);
+
+
+        rectF = new RectF(centX - radius, centY - radius, centX + radius, centY + radius);
+
+
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        RectF rectF = new RectF(roundWidth, roundWidth, getWidth() + roundWidth / 2, getHeight() + roundWidth / 2);
-        Paint paint = new Paint();
-        paint.setStrokeWidth(1);
-        paint.setColor(Color.RED);
+        drawDefaultRound(canvas);
 
-         canvas.drawRect(rectF,paint);
-        /*先画默认的圆弧*/
+        drawText(canvas);
+
+        drawProgressRound(canvas);
+
+
+    }
+
+    /*画进度*/
+    private void drawProgressRound(Canvas canvas) {
+
+
+        canvas.drawArc(rectF, 135, percent * 270, false, progressPaint);
+
+
+    }
+
+    private void drawDefaultRound(Canvas canvas) {
         canvas.drawArc(rectF, 135, 270, false, roundPaint);
+
+    }
+
+    private void drawText(Canvas canvas) {
+
+
+        /*先计算文字的宽度*/
+        float textWidth = textPaint.measureText(currentProgressText);
+
+        /*计算基线*/
+        Paint.FontMetricsInt fontMetrics = textPaint.getFontMetricsInt();
+        int dy = (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
+        int baseLine = getHeight() / 2 + dy;
+
+        canvas.drawText(currentProgressText, centX - textWidth / 2, baseLine, textPaint);
 
 
     }
@@ -111,4 +207,14 @@ public class QQStepView extends View {
     }
 
 
+    public void setMaxProgress(int maxProgress) {
+        this.maxProgress = maxProgress;
+        initAnimator();
+    }
+
+
+    public void setCurrentProgress(int currentProgress) {
+        this.currentProgress = currentProgress;
+        initAnimator();
+    }
 }

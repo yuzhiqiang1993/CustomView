@@ -29,13 +29,16 @@
 
 
     <com.yzq.customview.widget.QQStepView
-        android:layout_marginTop="10dp"
         android:id="@+id/qqStepView"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        app:roundWidth="2dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
         app:defaultColor="@color/colorPrimary"
         app:progressColor="@color/colorAccent"
-        android:layout_gravity="center" />
+        app:mTextColor="@color/colorAccent"
+        app:mTextSize="20sp"
+        app:roundWidth="6dp" />
 
 </LinearLayout>
