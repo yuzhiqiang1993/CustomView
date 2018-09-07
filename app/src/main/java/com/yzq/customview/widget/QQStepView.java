@@ -143,7 +143,7 @@ public class QQStepView extends View {
         centY = h / 2;
 
         /*求圆的半径*/
-        radius = centX - roundWidth;
+        radius = centX - roundWidth/2;
 
         LogUtils.i("半径：" + radius);
 

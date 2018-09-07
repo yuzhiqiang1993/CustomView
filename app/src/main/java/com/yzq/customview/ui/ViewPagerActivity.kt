@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.yzq.customview.R
+import com.yzq.customview.R.id.viewPager
 import com.yzq.customview.ui.fragment.PagerFragment
 import com.yzq.customview.utils.LogUtils
 import com.yzq.customview.widget.ColorText

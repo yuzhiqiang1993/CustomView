@@ -42,27 +42,14 @@
         app:roundWidth="6dp" />
 
 
-    <com.yzq.customview.widget.ColorText
-        android:id="@+id/colorText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <com.yzq.customview.widget.CircleProgress
+        android:layout_width="180dp"
+        android:layout_height="180dp"
         android:layout_gravity="center"
-        android:text="yuzhiqiang"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        app:changeColor="@color/colorAccent" />
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/l2r"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="从左到右" />
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/r2l"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="从右到左" />
-
-
+        android:layout_marginTop="10dp"
+        app:innerColor="@color/colorAccent"
+        app:mTextColor="@color/colorAccent"
+        app:mTextSize="18sp"
+        app:outerColor="@color/colorPrimary"
+        app:roundWidth="6dp" />
 </LinearLayout>

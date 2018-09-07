@@ -2,7 +2,7 @@
 <resources>
     <attr name="mTextColor" format="color"></attr>
     <attr name="mTextSize" format="dimension"></attr>
-
+    <attr name="roundWidth" format="dimension"></attr>
     <declare-styleable name="MyTextView">
 
         <attr name="mText" format="string"></attr>
@@ -15,8 +15,8 @@
 
     <declare-styleable name="QQStepView">
 
-        <attr name="roundWidth" format="dimension"></attr>
-        <attr name="defaultColor" format="color"></attr>
+        <attr name="roundWidth" ></attr>
+        <attr name="defaultColor"></attr>
         <attr name="progressColor" format="color"></attr>
         <attr name="mTextSize"></attr>
         <attr name="mTextColor"></attr>
@@ -28,6 +28,16 @@
 
         <attr name="changeColor" format="color"></attr>
 
+
+    </declare-styleable>
+
+    <declare-styleable name="CircleProgress">
+
+        <attr name="innerColor" format="color"></attr>
+        <attr name="outerColor" format="color"></attr>
+        <attr name="mTextColor"></attr>
+        <attr name="mTextSize"></attr>
+        <attr name="roundWidth"></attr>
 
     </declare-styleable>
 
