@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yzq.customview.R;
+import com.yzq.customview.utils.LogUtils;
 
 
 public class MyRatingBar extends View {
@@ -24,6 +25,8 @@ public class MyRatingBar extends View {
     private int starWidth = dp2px(16);
     private int spacing = dp2px(6);
     private float eventX = 0;
+    /*当前已选择星星的个数*/
+    private int selectedStarNum = -1;
 
     public MyRatingBar(Context context) {
         this(context, null);
@@ -70,9 +73,9 @@ public class MyRatingBar extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        LogUtils.i("draw");
+
         for (int i = 0; i < starNum; i++) {
-
-
             int startX = startNormal.getWidth() * i + spacing * (i + 1);
 
             if (startX < eventX) {
@@ -97,7 +100,24 @@ public class MyRatingBar extends View {
             case MotionEvent.ACTION_MOVE:
 
                 eventX = event.getX();
-                invalidate();
+
+
+                int moveIndex = (int) ((eventX - getPaddingLeft()) / (startNormal.getWidth() + spacing));
+
+                /*如果当前手指滑动位置大于等于最大个数时，改变值*/
+                if (moveIndex >= starNum) {
+                    moveIndex = starNum - 1;
+                }
+
+
+                /*当手指移动的index和已绘制的黄色星星值不一样时  再绘制  否则不需要绘制*/
+                if (selectedStarNum != moveIndex) {
+
+                    selectedStarNum=moveIndex;
+
+                    invalidate();
+                }
+
 
                 break;
         }
