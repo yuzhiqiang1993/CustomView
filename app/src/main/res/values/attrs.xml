@@ -15,7 +15,7 @@
 
     <declare-styleable name="QQStepView">
 
-        <attr name="roundWidth" ></attr>
+        <attr name="roundWidth"></attr>
         <attr name="defaultColor"></attr>
         <attr name="progressColor" format="color"></attr>
         <attr name="mTextSize"></attr>
@@ -39,6 +39,16 @@
         <attr name="mTextSize"></attr>
         <attr name="roundWidth"></attr>
 
+    </declare-styleable>
+
+
+    <declare-styleable name="MyRatingBar">
+
+        <attr name="startWidth" format="dimension"></attr>
+        <attr name="starNormal" format="reference"></attr>
+        <attr name="starSelected" format="reference"></attr>
+        <attr name="starNum" format="integer"></attr>
+        <attr name="spacing" format="dimension"></attr>
     </declare-styleable>
 
 </resources>

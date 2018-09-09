@@ -1,4 +1,4 @@
-package com.yzq.customview.ui
+package com.yzq.customview.ui.activity
 
 import android.graphics.Color
 import android.os.Bundle
