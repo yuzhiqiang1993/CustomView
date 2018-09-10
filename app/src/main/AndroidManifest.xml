@@ -20,7 +20,8 @@
         <activity android:name=".ui.activity.ViewPagerActivity" />
         <activity android:name=".ui.activity.ProgressActivity" />
         <activity android:name=".ui.activity.TextActivity" />
-        <activity android:name=".ui.activity.RatingActivity"></activity>
+        <activity android:name=".ui.activity.RatingActivity" />
+        <activity android:name=".ui.activity.IndexViewActivity"></activity>
     </application>
 
 </manifest>

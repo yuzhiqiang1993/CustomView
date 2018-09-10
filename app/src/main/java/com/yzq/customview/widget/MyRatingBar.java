@@ -113,7 +113,7 @@ public class MyRatingBar extends View {
                 /*当手指移动的index和已绘制的黄色星星值不一样时  再绘制  否则不需要绘制*/
                 if (selectedStarNum != moveIndex) {
 
-                    selectedStarNum=moveIndex;
+                    selectedStarNum = moveIndex;
 
                     invalidate();
                 }

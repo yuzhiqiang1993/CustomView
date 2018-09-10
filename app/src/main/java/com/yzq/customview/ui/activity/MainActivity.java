@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
         texts.add("ProgressView");
         texts.add("TextColorView");
         texts.add("RatingBar");
+        texts.add("IndexView");
 
         adapter = new TitleAdapter(R.layout.item_layout, texts);
 
@@ -66,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
                 break;
             case 3:
                 intent.setClass(this, RatingActivity.class);
+                break;
+
+            case 4:
+                intent.setClass(this, IndexViewActivity.class);
                 break;
 
 

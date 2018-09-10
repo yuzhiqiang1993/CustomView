@@ -51,4 +51,11 @@
         <attr name="spacing" format="dimension"></attr>
     </declare-styleable>
 
+
+    <declare-styleable name="IndexView">
+
+        <attr name="indexViewWidth"></attr>
+        <attr name="mTextSize"></attr>
+
+    </declare-styleable>
 </resources>
