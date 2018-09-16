@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -17,13 +16,15 @@ import com.yzq.customview.utils.LogUtils;
 
 public class IndexView extends View {
     private final String[] letters;
-    private final float letterWidth;
     private final Paint reactPaint;
     private int width;
     private int height;
     private int letterHeight;
     private Paint paint;
     private int textSize = sp2px(14);
+    private int currentLetterIndex;
+    private String touchLetter;
+    private TouchLetterListener listener;
 
     public IndexView(Context context) {
         this(context, null);
@@ -47,7 +48,6 @@ public class IndexView extends View {
         paint.setTextSize(textSize);
         paint.setColor(Color.BLACK);
 
-        letterWidth = paint.measureText(letters[0]);
 
         reactPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
@@ -90,22 +90,31 @@ public class IndexView extends View {
 
             int letterWidth = (int) paint.measureText(currentText);
 
-            int startX = width / 2 - letterWidth / 2;
+            int startX = (width - getPaddingRight() - getPaddingLeft()) / 2 - letterWidth / 2;
 
 
             Paint.FontMetricsInt fontMetricsInt = paint.getFontMetricsInt();
             int dy = (fontMetricsInt.bottom - fontMetricsInt.top) / 2 - fontMetricsInt.bottom;
 
             int baseLine = letterHeight * i + letterHeight / 2 + dy + getPaddingTop();
-            RectF rect = new RectF();
-            rect.top = getPaddingTop() + letterHeight * i;
-            rect.left = 0;
-            rect.bottom = getPaddingTop() + letterHeight * (i + 1);
-            rect.right = width;
+//            RectF rect = new RectF();
+//            rect.top = getPaddingTop() + letterHeight * i;
+//            rect.left = 0;
+//            rect.bottom = getPaddingTop() + letterHeight * (i + 1);
+//            rect.right = width;
+//
+//            canvas.drawRect(rect, reactPaint);
 
-            canvas.drawRect(rect, reactPaint);
 
-            canvas.drawText(currentText, startX, baseLine, paint);
+            if (currentText.equals(touchLetter)) {
+                paint.setColor(Color.RED);
+                canvas.drawText(currentText, startX, baseLine, paint);
+
+            } else {
+                paint.setColor(Color.BLACK);
+                canvas.drawText(currentText, startX, baseLine, paint);
+
+            }
 
         }
 
@@ -114,6 +123,41 @@ public class IndexView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_MOVE:
+
+                int index = (int) (event.getY() / letterHeight);
+
+                if (index >= 0 && index < letters.length) {
+
+                    if (currentLetterIndex != index) {
+                        currentLetterIndex = index;
+                        touchLetter = letters[currentLetterIndex];
+                        LogUtils.i("当前的letter：" + touchLetter);
+                        if (listener != null) {
+                            listener.showLetter(touchLetter);
+
+                        }
+                        invalidate();
+
+                    }
+
+
+                }
+
+                break;
+            case MotionEvent.ACTION_UP:
+                if (listener != null) {
+                    listener.hideLetter();
+                }
+
+                break;
+
+
+        }
         return true;
     }
 
@@ -121,5 +165,18 @@ public class IndexView extends View {
 
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, sp, getResources().getDisplayMetrics());
     }
+
+
+    public void setOnTouchLetterListener(TouchLetterListener listener) {
+        this.listener = listener;
+
+    }
+
+   public interface TouchLetterListener {
+        void showLetter(String touchLetter);
+
+        void hideLetter();
+    }
+
 }
 
