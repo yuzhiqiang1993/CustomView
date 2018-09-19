@@ -106,15 +106,9 @@ public class IndexView extends View {
 //            canvas.drawRect(rect, reactPaint);
 
 
-            if (currentText.equals(touchLetter)) {
-                paint.setColor(Color.RED);
-                canvas.drawText(currentText, startX, baseLine, paint);
+            paint.setColor(Color.BLACK);
+            canvas.drawText(currentText, startX, baseLine, paint);
 
-            } else {
-                paint.setColor(Color.BLACK);
-                canvas.drawText(currentText, startX, baseLine, paint);
-
-            }
 
         }
 
@@ -139,7 +133,6 @@ public class IndexView extends View {
                         LogUtils.i("当前的letter：" + touchLetter);
                         if (listener != null) {
                             listener.showLetter(touchLetter);
-
                         }
                         invalidate();
 
@@ -155,6 +148,8 @@ public class IndexView extends View {
                 }
 
                 break;
+
+            default:
 
 
         }
@@ -172,7 +167,7 @@ public class IndexView extends View {
 
     }
 
-   public interface TouchLetterListener {
+    public interface TouchLetterListener {
         void showLetter(String touchLetter);
 
         void hideLetter();
