@@ -12,7 +12,14 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.yzq.customview.R;
-import com.yzq.customview.utils.LogUtils;
+
+
+/**
+ * @author : yzq
+ * @description: 字母索引View
+ * @date : 2018/9/20
+ * @time : 14:50
+ */
 
 public class IndexView extends View {
     private final String[] letters;
@@ -62,16 +69,10 @@ public class IndexView extends View {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
         width = MeasureSpec.getSize(widthMeasureSpec) + getPaddingLeft() + getPaddingRight();
         height = MeasureSpec.getSize(heightMeasureSpec);
 
-        LogUtils.i("测量的高度" + height);
-
-        /*计算每个字母占用的高度*/
-
         letterHeight = (height - getPaddingBottom() - getPaddingTop()) / letters.length;
-        LogUtils.i("每个字母的高度：" + letterHeight);
 
         setMeasuredDimension(width, height);
 
@@ -105,7 +106,6 @@ public class IndexView extends View {
 //
 //            canvas.drawRect(rect, reactPaint);
 
-
             paint.setColor(Color.BLACK);
             canvas.drawText(currentText, startX, baseLine, paint);
 
@@ -130,7 +130,6 @@ public class IndexView extends View {
                     if (currentLetterIndex != index) {
                         currentLetterIndex = index;
                         touchLetter = letters[currentLetterIndex];
-                        LogUtils.i("当前的letter：" + touchLetter);
                         if (listener != null) {
                             listener.showLetter(touchLetter);
                         }

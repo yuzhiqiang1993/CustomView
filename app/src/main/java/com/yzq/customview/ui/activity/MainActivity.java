@@ -74,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements BaseQuickAdapter.
                 break;
 
 
+            default:
         }
 
         startActivity(intent);
