@@ -16,6 +16,15 @@ import com.yzq.customview.R;
 import com.yzq.customview.utils.LogUtils;
 
 
+ 
+ /**
+ * @description: 评分控件
+ * @author : yzq
+ * @date   : 2018/12/4
+ * @time   : 17:08
+ * 
+ */
+ 
 public class MyRatingBar extends View {
     private final Bitmap startNormal;
     private final Bitmap starSelected;

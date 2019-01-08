@@ -10,6 +10,15 @@ import android.util.AttributeSet;
 import com.yzq.customview.R;
 import com.yzq.customview.utils.LogUtils;
 
+
+ /**
+ * @description: 仿今日头条tab
+ * @author : yzq
+ * @date   : 2018/12/4
+ * @time   : 16:50
+ *
+ */
+
 public class ColorText extends android.support.v7.widget.AppCompatTextView {
 
     private String text;

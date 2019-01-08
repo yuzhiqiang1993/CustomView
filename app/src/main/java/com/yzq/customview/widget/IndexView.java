@@ -11,6 +11,7 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.yzq.customview.R;
 
 
@@ -123,25 +124,32 @@ public class IndexView extends View {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
 
+
+                LogUtils.i("onTouchEvent ACTION_DOWN/ACTION_MOVE");
                 int index = (int) (event.getY() / letterHeight);
 
+
+                LogUtils.i("index:->" + index);
                 if (index >= 0 && index < letters.length) {
 
                     if (currentLetterIndex != index) {
                         currentLetterIndex = index;
+                        LogUtils.i("currentLetterIndex:->" + currentLetterIndex);
                         touchLetter = letters[currentLetterIndex];
+
                         if (listener != null) {
+                            LogUtils.i("touchLetter");
                             listener.showLetter(touchLetter);
                         }
-                        invalidate();
 
                     }
-
 
                 }
 
                 break;
             case MotionEvent.ACTION_UP:
+
+                LogUtils.i("onTouchEvent ACTION_UP");
                 if (listener != null) {
                     listener.hideLetter();
                 }

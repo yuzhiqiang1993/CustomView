@@ -16,6 +16,15 @@ import android.view.animation.DecelerateInterpolator;
 import com.yzq.customview.R;
 import com.yzq.customview.utils.LogUtils;
 
+ 
+ /**
+ * @description: 仿运动步数
+ * @author : yzq
+ * @date   : 2018/12/4
+ * @time   : 16:54
+ * 
+ */
+ 
 public class QQStepView extends View {
 
     private int mTextColor = Color.BLACK;
